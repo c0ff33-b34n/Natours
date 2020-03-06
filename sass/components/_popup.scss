@@ -7,6 +7,9 @@
     z-index: 3000;
     top: 0;
     left: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
 
     &__content {
         @include absCenter;
@@ -16,6 +19,9 @@
         border-radius: 3px;
         display: table;
         overflow: hidden; // to make border radius appear over photos
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.25); // shrink content, to make it scale up (zoom ineffect) when popup shown.
+        transition: all 0.4s 0.1s;
     }
 
     &__left {
@@ -44,6 +50,36 @@
         hyphens: auto;
     }
 
+    // Open states
 
+    &:target {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &:target &__content {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    &__close {
+        &:link,
+        &:visited {
+            color: $color-dark-grey;
+            position: absolute;
+            top: 2.5rem;
+            right: 2.5rem;
+            font-size: 4rem;
+            line-height: 1;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+
+        &:hover {
+            color: $color-primary;
+        }
+
+    }
 
 }
