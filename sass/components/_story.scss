@@ -24,15 +24,20 @@
         width: 15rem;
         height: 15rem;
         float: left;
-        -webkit-shape-outside: circle(50% at 50% 50%);
-        -moz-shape-outside: circle(50% at 50% 50%);
-        shape-outside: circle(50% at 50% 50%); // radius is 50% of width/height, centre positioned at 50% 50%, float text around this shape.
-        
-        -webkit-clip-path: circle(50% at 50% 50%);
-        -moz-clip-path: circle(50% at 50% 50%);
-        clip-path: circle(50% at 50% 50%); // actual visible circle
         transform: translateX(-3rem) skewX(12deg);
         position: relative; // to allow positioning of caption over image
+        overflow: hidden;
+        border-radius: 50%;
+
+        @supports (clip-path: circle(50% at 50% 50%)) or (-webkit-clip-path: circle(50% at 50% 50%)) {
+            -webkit-clip-path: circle(50% at 50% 50%);
+            -moz-clip-path: circle(50% at 50% 50%);
+            clip-path: circle(50% at 50% 50%); // actual visible circle
+            -webkit-shape-outside: circle(50% at 50% 50%);
+            -moz-shape-outside: circle(50% at 50% 50%);
+            shape-outside: circle(50% at 50% 50%); // radius is 50% of width/height, centre positioned at 50% 50%, float text around this shape.
+            border-radius: none;   
+        }
 
         @include respond(phone) {
             transform: translateX(-3rem) skewX(0);
